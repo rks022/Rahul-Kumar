@@ -1,6 +1,6 @@
 # Rahul-Kumar
 Setup instructions:
-  i) First Download Project from github
+  i) First Download Project from github <br />
   ii) Open the terminal at that folder location
   iii) Run commond "npm install"
   iv) Then run commond "node app.js"
