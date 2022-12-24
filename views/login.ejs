@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <center>
+        <h3>please login to access the home page</h3>
+
+        <label>Enter Username</label>  
+        <input type="text" name="email" id="email"  placeholder="Enter Email" required />  
+        <br />  
+
+        <label>Enter Otp</label>  
+        <input type="text" name="otp" id="otp"  placeholder="Enter Email" required />  
+        <br />  
+
+        <center><button id="sendotp" onclick="sendotp()">SendOTP</button></center>
+        <center><button class = "login" onclick="login()">Login</button></center>
+    </center>
+</body>
+<script>
+    function login(){
+        let x = document.querySelector('#sendotp').innerHTML;
+        if(x == "SendOTP") document.querySelector("#sendotp").innerHTML = "ResendOTP";
+        console.log($('#email').val())
+
+        $.ajax({
+        url:'/api/login',
+        data:{
+          email:$('#email').val().trim(),
+          otp:$('#otp').val().trim()
+        },
+        type:"POST",
+        success:(code)=>{
+          if(code == "success"){
+            alert("login successfull")
+            window.location.href = "/";
+          }else{
+            alert("Invalid Otp");
+          }
+        }
+      })
+
+    }
+    function sendotp(){
+        let x = document.querySelector('#sendotp').innerHTML;
+        if(x == "SendOTP") document.querySelector("#sendotp").innerHTML = "ResendOTP";
+        console.log($('#email').val())
+
+        $.ajax({
+        url:'/api/generateOtp',
+        data:{
+          email:$('#email').val().trim()
+        },
+        type:"POST",
+        success:(code)=>{
+          if(code == "success"){
+            alert("Otp has been sent to email")
+          }else{
+            alert(code)
+          }
+        }
+      })
+
+    }
+</script>
+</html>
